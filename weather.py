@@ -13,25 +13,29 @@ new_minute = 5
 update_minute = -1
 
 matrix = Adafruit_RGBmatrix(32,1)
-image = Imagenew("1", (32,32))
-draw = ImageDraw.Draw(image)
+image_a = Image.open("Assets/Alphabet/a.jpg")
+image_b = Image.open("Assets/Alphabet/b.jpg")
+image_a.load()
+image_b.load()
+
+matrix.SetImage(image_a.im.id, 0, 0)
+matrix.SetImage(image_b.im.id, 5, 0)
 
 while True:
-    if new_minute >= 5:
-        f = urllib2.urlopen(url)
-	json_string = f.read()
-	parsed_json = json.loads(json_string)
-	city = parsed_json['location']['city']
-	state = parsed_json['location']['state']
-	weather = parsed_json['current_observation']['weather']
-	temperature_string = parsed_json['current_observation']['temp_f']
-	feelslike_string = parsed_json['current_observation']['feelslike_f']
-	new_minute = 0
-	f.close()
+  if new_minute >= 5:
+	  f = urllib2.urlopen(url)
+		json_string = f.read()
+		parsed_json = json.loads(json_string)
+		city = parsed_json['location']['city']
+		state = parsed_json['location']['state']
+		weather = parsed_json['current_observation']['weather']
+		temperature_string = parsed_json['current_observation']['temp_f']
+		feelslike_string = parsed_json['current_observation']['feelslike_f']
+		new_minute = 0
+		f.close()
 
-    if update_minute != minute:
-        matrix.Clear()
-        matrix.print(strftime("%H:%M"))
+if update_minute != minute:
+  matrix.Clear()
 	print strftime("%H:%M")
 	minute = strftime("%M")
 	print weather.lower()
@@ -39,4 +43,4 @@ while True:
 	print "Feels like	" + str(feelslike_string)
 	new_minute += 1
 
-    update_minute = strftime("%M")
+update_minute = strftime("%M")
