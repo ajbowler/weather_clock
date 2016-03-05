@@ -4,6 +4,7 @@ import Image
 import ImageDraw
 from rgbmatrix import Adafruit_RGBmatrix
 from time import gmtime, strftime
+import os
 
 key = "14fb6128f6219c5f"
 zip = "50011"
@@ -12,7 +13,8 @@ minute = strftime("%M")
 new_minute = 5
 update_minute = -1
 
-matrix = Adafruit_RGBmatrix(32,1)
+matrix = Adafruit_RGBmatrix(32,1)    
+
 image_a = Image.open("Assets/Alphabet/a.jpg")
 image_b = Image.open("Assets/Alphabet/b.jpg")
 image_c = Image.open("Assets/Alphabet/c.jpg")
@@ -93,12 +95,11 @@ image_colon.load()
 
 while True:
     if update_minute != minute:
+        # if 5 minutes have passed, update the weather
         if new_minute >= 5:
             f = urllib2.urlopen(url)
             json_string = f.read()
             parsed_json = json.loads(json_string)
-            city = parsed_json['location']['city']
-            state = parsed_json['location']['state']
             weather = parsed_json['current_observation']['weather']
             temperature_string = parsed_json['current_observation']['temp_f']
             feelslike_string = parsed_json['current_observation']['feelslike_f']
@@ -107,16 +108,27 @@ while True:
         else:
             new_minute += 1
 
-        matrix.Clear()
-        matrix.SetImage(image_t.im.id,0,0)
-        matrix.SetImage(image_e.im.id,5,0)
-        matrix.SetImage(image_m.im.id,10,0)
-        matrix.SetImage(image_p.im.id,15,0)
-        matrix.SetImage(image_colon.im.id,20,0)
-        matrix.SetImage(image_3.im.id,0,6)
-        matrix.SetImage(image_4.im.id,5,6)
+        time = strftime("%I:%M")
 
-        print strftime("%H:%M")
+        matrix.Clear()
+        #display time
+        count = 0
+        for c in time:
+            matrix.SetImage(imager(c).im.id, count, 0)
+        # display 'temp: '
+        matrix.SetImage(image_t.im.id,0,6)
+        matrix.SetImage(image_e.im.id,5,6)
+        matrix.SetImage(image_m.im.id,10,6)
+        matrix.SetImage(image_p.im.id,15,6)
+        matrix.SetImage(image_colon.im.id,20,6)
+        #display actual temperature
+        count = 0
+        for c in temperature_string:
+            if c != ' '
+                matrix.SetImage(imager(c).im.id, count,12)
+                count +=5
+
+        print strftime("%I:%M")
         minute = strftime("%M")
         print weather.lower()
         print "Temp: " + str(temperature_string)
@@ -203,7 +215,6 @@ def imager(chr):
         return image_minus
     elif chr == ':':
         return image_colon
-    else return
 
 
 
