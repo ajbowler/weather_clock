@@ -95,7 +95,7 @@ images = {
     ':': image_colon
 }
 
-for key, value in images:
+for key, value in images.iteritems():
     value.load()
 
 while True:
