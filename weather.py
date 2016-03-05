@@ -55,6 +55,18 @@ image_minus = Image.open("Assets/Alphabet/minus.jpg")
 image_colon = Image.open("Assets/Alphabet/colon.jpg")
 image_period = Image.open("Assets/Alphabet/period.jpg")
 
+image_snow = Image.open("Assets/Conditions/snow.jpg")
+image_cloudy = Image.open("Assets/Conditions/cloudy.jpg")
+image_partly_cloudy = Image.open("Assets/Conditions/image_partly_cloudy.jpg") 
+image_rain = Image.open("Assets/Conditions/rain.jpg")
+image_thunder_storm = Image.open("Assets/Conditions/thunder_storm")
+
+image_snow.load()
+image_cloudy.load()
+image_partly_cloudy.loud()
+image_rain.loud()
+image_thunder_storm.loud()
+
 images = {
     'a': image_a,
     'b': image_b,
@@ -137,8 +149,22 @@ while True:
             count +=5
         #display weather
         count = 0
-        for c in weather.lower:
-            matrix.SetImage(images[c].im.id, count, 17)
+        
+        if "snow" in weather.lower():
+            matrix.SetImage(image_snow.im.id, 0, 15)
+        elif "partly" in weather.lower():
+            matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
+        elif "scattered" in weather.lower():
+            matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
+        elif "mostly" in weather.lower():
+            matrix.SetImage(image_cloudy.im.id, 0, 15)
+        elif "overcast" in weather.lower()
+            matrix.SetImage(image_cloudy.im.id, 0, 15)
+        elif "thunderstorm" in weather.lower()
+            matrix.SetImage(image_thunder_storm.im.id, 0, 15)
+        elif "rain" in weather.lower()
+            matrix.SetImage(image_rain.im.id, 0, 15)
+
 
         print strftime("%I:%M")
         minute = strftime("%M")
