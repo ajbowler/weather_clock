@@ -150,19 +150,21 @@ while True:
         #display weather
         count = 0
         
-        if "snow" in weather.lower():
+        low_weather = weather.lower()
+
+        if "snow" in low_weather:
             matrix.SetImage(image_snow.im.id, 0, 15)
-        elif "partly" in weather.lower():
+        elif "partly" in low_weather:
             matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
-        elif "scattered" in weather.lower():
+        elif "scattered" in low_weather:
             matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
-        elif "mostly" in weather.lower():
+        elif "mostly" in low_weather:
             matrix.SetImage(image_cloudy.im.id, 0, 15)
-        elif "overcast" in weather.lower()
+        elif "overcast" in low_weather:
             matrix.SetImage(image_cloudy.im.id, 0, 15)
-        elif "thunderstorm" in weather.lower()
+        elif "thunderstorm" in low_weather:
             matrix.SetImage(image_thunder_storm.im.id, 0, 15)
-        elif "rain" in weather.lower()
+        elif "rain" in low_weather:
             matrix.SetImage(image_rain.im.id, 0, 15)
 
 
