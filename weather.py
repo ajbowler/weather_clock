@@ -135,6 +135,10 @@ while True:
         for c in str(temperature_string):
             matrix.SetImage(images[c].im.id, count,12)
             count +=5
+        #display weather
+        count = 0
+        for c in weather:
+            matrix.SetImage(images[c].im.id, count, 17)
 
         print strftime("%I:%M")
         minute = strftime("%M")
