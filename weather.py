@@ -93,51 +93,6 @@ image_0.load()
 image_minus.load()
 image_colon.load()
 
-while True:
-    if update_minute != minute:
-        # if 5 minutes have passed, update the weather
-        if new_minute >= 5:
-            f = urllib2.urlopen(url)
-            json_string = f.read()
-            parsed_json = json.loads(json_string)
-            weather = parsed_json['current_observation']['weather']
-            temperature_string = parsed_json['current_observation']['temp_f']
-            feelslike_string = parsed_json['current_observation']['feelslike_f']
-            new_minute = 0
-            f.close()
-        else:
-            new_minute += 1
-
-        time = strftime("%I:%M")
-
-        matrix.Clear()
-        #display time
-        count = 0
-        for c in time:
-            matrix.SetImage(imager(c).im.id, count, 0)
-        # display 'temp: '
-        matrix.SetImage(image_t.im.id,0,6)
-        matrix.SetImage(image_e.im.id,5,6)
-        matrix.SetImage(image_m.im.id,10,6)
-        matrix.SetImage(image_p.im.id,15,6)
-        matrix.SetImage(image_colon.im.id,20,6)
-        #display actual temperature
-        count = 0
-        for c in temperature_string:
-            if c != ' '
-                matrix.SetImage(imager(c).im.id, count,12)
-                count +=5
-
-        print strftime("%I:%M")
-        minute = strftime("%M")
-        print weather.lower()
-        print "Temp: " + str(temperature_string)
-        print "Feels like	" + str(feelslike_string)
-
-    update_minute = strftime("%M")
-
-
-
 def imager(chr):
     if chr == 'a':
         return image_a
@@ -215,6 +170,53 @@ def imager(chr):
         return image_minus
     elif chr == ':':
         return image_colon
+
+while True:
+    if update_minute != minute:
+        # if 5 minutes have passed, update the weather
+        if new_minute >= 5:
+            f = urllib2.urlopen(url)
+            json_string = f.read()
+            parsed_json = json.loads(json_string)
+            weather = parsed_json['current_observation']['weather']
+            temperature_string = parsed_json['current_observation']['temp_f']
+            feelslike_string = parsed_json['current_observation']['feelslike_f']
+            new_minute = 0
+            f.close()
+        else:
+            new_minute += 1
+
+        time = strftime("%I:%M")
+
+        matrix.Clear()
+        #display time
+        count = 0
+        for c in time:
+            matrix.SetImage(imager(c).im.id, count, 0)
+        # display 'temp: '
+        matrix.SetImage(image_t.im.id,0,6)
+        matrix.SetImage(image_e.im.id,5,6)
+        matrix.SetImage(image_m.im.id,10,6)
+        matrix.SetImage(image_p.im.id,15,6)
+        matrix.SetImage(image_colon.im.id,20,6)
+        #display actual temperature
+        count = 0
+        for c in temperature_string:
+            if c != ' '
+                matrix.SetImage(imager(c).im.id, count,12)
+                count +=5
+
+        print strftime("%I:%M")
+        minute = strftime("%M")
+        print weather.lower()
+        print "Temp: " + str(temperature_string)
+        print "Feels like	" + str(feelslike_string)
+
+    update_minute = strftime("%M")
+
+
+
+
 
 
 
