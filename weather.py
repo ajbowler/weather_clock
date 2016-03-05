@@ -54,84 +54,49 @@ image_0 = Image.open("Assets/Alphabet/0.jpg")
 image_minus = Image.open("Assets/Alphabet/minus.jpg")
 image_colon = Image.open("Assets/Alphabet/colon.jpg")
 
+images = {
+    'a': image_a
+    'b': image_b
+    'c': image_c    
+    'd': image_d
+    'e': image_e
+    'f': image_f
+    'g': image_g
+    'h': image_h
+    'i': image_i
+    'j': image_j
+    'k': image_k
+    'l': image_l
+    'm': image_m
+    'n': image_n
+    'o': image_o
+    'p': image_p
+    'q': image_q
+    'r': image_r
+    's': image_s
+    't': image_t
+    'u': image_u
+    'v': image_v
+    'w': image_w
+    'x': image_x
+    'y': image_y
+    'z': image_z
+    '1': image_1
+    '2': image_2
+    '3': image_3
+    '4': image_4
+    '5': image_5
+    '6': image_6
+    '7': image_7
+    '8': image_8
+    '9': image_9
+    '0': image_0
+    '-': image_minus
+    ':': image_colon
+}
 
-def imager(chr):
-    if chr == 'a':
-        return image_a
-    elif chr == 'b':
-        return image_b
-    elif chr == 'c':
-        return image_c
-    elif chr == 'd':
-        return image_d
-    elif chr == 'e':
-        return image_e
-    elif chr == 'f':
-        return image_f
-    elif chr == 'g':
-        return image_g
-    elif chr == 'h':
-        return image_h
-    elif chr == 'i':
-        return image_
-    elif chr == 'j':
-        return image_j
-    elif chr == 'k':
-        return image_k
-    elif chr == 'l':
-        return image_l
-    elif chr == 'm':
-        return image_m
-    elif chr == 'n':
-        return image_n
-    elif chr == 'o':
-        return image_o
-    elif chr == 'p':
-        return image_p
-    elif chr == 'q':
-        return image_q
-    elif chr == 'r':
-        return image_r
-    elif chr == 's':
-        return image_s
-    elif chr == 't':
-        return image_t
-    elif chr == 'u':
-        return image_u
-    elif chr == 'v':
-        return image_v
-    elif chr == 'w':
-        return image_w
-    elif chr == 'x':
-        return image_x
-    elif chr == 'y':
-        return image_y
-    elif chr == 'z':
-        return image_z
-    elif chr == '1':
-        return image_1
-    elif chr == '2':
-        return image_2
-    elif chr == '3':
-        return image_3
-    elif chr == '4':
-        return image_4
-    elif chr == '5':
-        return image_5
-    elif chr == '6':
-        return image_6
-    elif chr == '7':
-        return image_7
-    elif chr == '8':
-        return image_8
-    elif chr == '9':
-        return image_9
-    elif chr == '0':
-        return image_0
-    elif chr == '-':
-        return image_minus
-    elif chr == ':':
-        return image_colon
+for key, value in images:
+    value.load()
 
 while True:
     if update_minute != minute:
@@ -154,15 +119,10 @@ while True:
         #display time
         count = 0
         for c in time:
-            curim = imager(c)
-            curim.load()
-            matrix.SetImage(curim.im.id, count, 0)
+            matrix.SetImage(images[c].im.id, count, 0)
+            count += 5
+
         # display 'temp: '
-        image_t.load()
-        image_e.load()
-        image_m.load()
-        image_p.load()
-        image_colon.load()
         matrix.SetImage(image_t.im.id,0,6)
         matrix.SetImage(image_e.im.id,5,6)
         matrix.SetImage(image_m.im.id,10,6)
@@ -171,9 +131,7 @@ while True:
         #display actual temperature
         count = 0
         for c in str(temperature_string):
-            curim = imager(c)
-            curim.load()
-            matrix.SetImage(curim.im.id, count,12)
+            matrix.SetImage(images[c].im.id, count,12)
             count +=5
 
         print strftime("%I:%M")
