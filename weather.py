@@ -13,7 +13,7 @@ minute = strftime("%M")
 new_minute = 5
 update_minute = -1
 
-matrix = Adafruit_RGBmatrix(32,1)    
+matrix = Adafruit_RGBmatrix(32,1)
 
 image_a = Image.open("Assets/Alphabet/a.jpg")
 image_b = Image.open("Assets/Alphabet/b.jpg")
@@ -54,44 +54,6 @@ image_0 = Image.open("Assets/Alphabet/0.jpg")
 image_minus = Image.open("Assets/Alphabet/minus.jpg")
 image_colon = Image.open("Assets/Alphabet/colon.jpg")
 
-image_a.load()
-image_b.load()
-image_c.load()
-image_d.load()
-image_e.load()
-image_f.load()
-image_g.load()
-image_h.load()
-image_i.load()
-image_j.load()
-image_k.load()
-image_l.load()
-image_m.load()
-image_n.load()
-image_o.load()
-image_p.load()
-image_q.load()
-image_r.load()
-image_s.load()
-image_t.load()
-image_u.load()
-image_v.load()
-image_w.load()
-image_x.load()
-image_y.load()
-image_z.load()
-image_1.load()
-image_2.load()
-image_3.load()
-image_4.load()
-image_5.load()
-image_6.load()
-image_7.load()
-image_8.load()
-image_9.load()
-image_0.load()
-image_minus.load()
-image_colon.load()
 
 def imager(chr):
     if chr == 'a':
@@ -192,8 +154,15 @@ while True:
         #display time
         count = 0
         for c in time:
-            matrix.SetImage(imager(c).im.id, count, 0)
+            curim = imager(c)
+            curim.load()
+            matrix.SetImage(curim.im.id, count, 0)
         # display 'temp: '
+        image_t.load()
+        image_e.load()
+        image_m.load()
+        image_p.load()
+        image_colon.load()
         matrix.SetImage(image_t.im.id,0,6)
         matrix.SetImage(image_e.im.id,5,6)
         matrix.SetImage(image_m.im.id,10,6)
@@ -201,10 +170,11 @@ while True:
         matrix.SetImage(image_colon.im.id,20,6)
         #display actual temperature
         count = 0
-        for c in temperature_string:
-            if c != ' '
-                matrix.SetImage(imager(c).im.id, count,12)
-                count +=5
+        for c in str(temperature_string):
+            curim = imager(c)
+            curim.load()
+            matrix.SetImage(curim.im.id, count,12)
+            count +=5
 
         print strftime("%I:%M")
         minute = strftime("%M")
