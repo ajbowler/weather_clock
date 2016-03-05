@@ -119,7 +119,7 @@ while True:
 
         matrix.Clear()
         #display time
-        count = 0
+        count = 5
         for c in time:
             matrix.SetImage(images[c].im.id, count, 0)
             count += 5
