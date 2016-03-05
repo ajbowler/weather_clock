@@ -57,15 +57,15 @@ image_period = Image.open("Assets/Alphabet/period.jpg")
 
 image_snow = Image.open("Assets/Conditions/snow.jpg")
 image_cloudy = Image.open("Assets/Conditions/cloudy.jpg")
-image_partly_cloudy = Image.open("Assets/Conditions/image_partly_cloudy.jpg") 
+image_partly_cloudy = Image.open("Assets/Conditions/partly_cloudy.jpg")
 image_rain = Image.open("Assets/Conditions/rain.jpg")
-image_thunder_storm = Image.open("Assets/Conditions/thunder_storm")
+image_thunder_storm = Image.open("Assets/Conditions/thunder_storm.jpg")
 
 image_snow.load()
 image_cloudy.load()
-image_partly_cloudy.loud()
-image_rain.loud()
-image_thunder_storm.loud()
+image_partly_cloudy.load()
+image_rain.load()
+image_thunder_storm.load()
 
 images = {
     'a': image_a,
@@ -136,20 +136,14 @@ while True:
             matrix.SetImage(images[c].im.id, count, 0)
             count += 5
 
-        # display 'temp: '
-        matrix.SetImage(image_t.im.id,0,6)
-        matrix.SetImage(image_e.im.id,5,6)
-        matrix.SetImage(image_m.im.id,10,6)
-        matrix.SetImage(image_p.im.id,15,6)
-        matrix.SetImage(image_colon.im.id,20,6)
         #display actual temperature
         count = 0
         for c in str(temperature_string):
-            matrix.SetImage(images[c].im.id, count,12)
+            matrix.SetImage(images[c].im.id, count+6 ,7)
             count +=5
         #display weather
         count = 0
-        
+
         low_weather = weather.lower()
 
         if "snow" in low_weather:
