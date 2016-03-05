@@ -53,6 +53,7 @@ image_9 = Image.open("Assets/Alphabet/9.jpg")
 image_0 = Image.open("Assets/Alphabet/0.jpg")
 image_minus = Image.open("Assets/Alphabet/minus.jpg")
 image_colon = Image.open("Assets/Alphabet/colon.jpg")
+image_period = Image.open("Assets/Alphabet/period.jpg")
 
 images = {
     'a': image_a,
@@ -92,7 +93,8 @@ images = {
     '9': image_9,
     '0': image_0,
     '-': image_minus,
-    ':': image_colon
+    ':': image_colon,
+    '.': image_period
 }
 
 for key, value in images:
