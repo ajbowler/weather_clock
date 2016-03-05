@@ -60,12 +60,14 @@ image_cloudy = Image.open("Assets/Conditions/cloudy.jpg")
 image_partly_cloudy = Image.open("Assets/Conditions/partly_cloudy.jpg")
 image_rain = Image.open("Assets/Conditions/rain.jpg")
 image_thunder_storm = Image.open("Assets/Conditions/thunder_storm.jpg")
+image_sunny = Image.open("Assets/Conditions/sunny.jpg")
 
 image_snow.load()
 image_cloudy.load()
 image_partly_cloudy.load()
 image_rain.load()
 image_thunder_storm.load()
+image_sunny.load()
 
 images = {
     'a': image_a,
@@ -160,6 +162,8 @@ while True:
             matrix.SetImage(image_thunder_storm.im.id, 0, 15)
         elif "rain" in low_weather:
             matrix.SetImage(image_rain.im.id, 0, 15)
+        elif "cloudy" in low_weather:
+            matrix.SetImage(image_sunny.im.id, 0, 15)
 
 
         print strftime("%I:%M")
