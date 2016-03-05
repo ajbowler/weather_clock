@@ -18,29 +18,30 @@ image_b = Image.open("Assets/Alphabet/b.jpg")
 image_a.load()
 image_b.load()
 
-matrix.SetImage(image_a.im.id, 0, 0)
-matrix.SetImage(image_b.im.id, 5, 0)
+for n in range(0,31):
+    matrix.SetImage(image_a.im.id, n, 10)
+    matrix.SetImage(image_b.im.id, n, 0)
 
 while True:
-  if new_minute >= 5:
-	  f = urllib2.urlopen(url)
-		json_string = f.read()
-		parsed_json = json.loads(json_string)
-		city = parsed_json['location']['city']
-		state = parsed_json['location']['state']
-		weather = parsed_json['current_observation']['weather']
-		temperature_string = parsed_json['current_observation']['temp_f']
-		feelslike_string = parsed_json['current_observation']['feelslike_f']
-		new_minute = 0
-		f.close()
+    if new_minute >= 5:
+        f = urllib2.urlopen(url)
+        json_string = f.read()
+        parsed_json = json.loads(json_string)
+        city = parsed_json['location']['city']
+	state = parsed_json['location']['state']
+	weather = parsed_json['current_observation']['weather']
+	temperature_string = parsed_json['current_observation']['temp_f']
+	feelslike_string = parsed_json['current_observation']['feelslike_f']
+	new_minute = 0
+	f.close()
 
 if update_minute != minute:
-  matrix.Clear()
-	print strftime("%H:%M")
-	minute = strftime("%M")
-	print weather.lower()
-	print "Temp: " + str(temperature_string)
-	print "Feels like	" + str(feelslike_string)
-	new_minute += 1
+    matrix.Clear()
+    print strftime("%H:%M")
+    minute = strftime("%M")
+    print weather.lower()
+    print "Temp: " + str(temperature_string)
+    print "Feels like	" + str(feelslike_string)
+    new_minute += 1
 
 update_minute = strftime("%M")
