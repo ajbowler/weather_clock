@@ -114,7 +114,7 @@ while True:
         matrix.SetImage(image_p.im.id,15,0)
         matrix.SetImage(image_colon.im.id,20,0)
         matrix.SetImage(image_3.im.id,0,6)
-        matrix.SetImage(image_4.im.id,0,6)
+        matrix.SetImage(image_4.im.id,5,6)
 
         print strftime("%H:%M")
         minute = strftime("%M")
@@ -123,3 +123,101 @@ while True:
         print "Feels like	" + str(feelslike_string)
 
     update_minute = strftime("%M")
+
+
+
+def imager(chr):
+    if chr == 'a':
+        return image_a
+    elif chr == 'b':
+        return image_b
+    elif chr == 'c':
+        return image_c
+    elif chr == 'd':
+        return image_d
+    elif chr == 'e':
+        return image_e
+    elif chr == 'f':
+        return image_f
+    elif chr == 'g':
+        return image_g
+    elif chr == 'h':
+        return image_h
+    elif chr == 'i':
+        return image_
+    elif chr == 'j':
+        return image_j
+    elif chr == 'k':
+        return image_k
+    elif chr == 'l':
+        return image_l
+    elif chr == 'm':
+        return image_m
+    elif chr == 'n':
+        return image_n
+    elif chr == 'o':
+        return image_o
+    elif chr == 'p':
+        return image_p
+    elif chr == 'q':
+        return image_q
+    elif chr == 'r':
+        return image_r
+    elif chr == 's':
+        return image_s
+    elif chr == 't':
+        return image_t
+    elif chr == 'u':
+        return image_u
+    elif chr == 'v':
+        return image_v
+    elif chr == 'w':
+        return image_w
+    elif chr == 'x':
+        return image_x
+    elif chr == 'y':
+        return image_y
+    elif chr == 'z':
+        return image_z
+    elif chr == '1':
+        return image_1
+    elif chr == '2':
+        return image_2
+    elif chr == '3':
+        return image_3
+    elif chr == '4':
+        return image_4
+    elif chr == '5':
+        return image_5
+    elif chr == '6':
+        return image_6
+    elif chr == '7':
+        return image_7
+    elif chr == '8':
+        return image_8
+    elif chr == '9':
+        return image_9
+    elif chr == '0':
+        return image_0
+    elif chr == '-':
+        return image_minus
+    elif chr == ':':
+        return image_colon
+    else return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
