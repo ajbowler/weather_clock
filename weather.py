@@ -13,14 +13,20 @@ new_minute = 5
 update_minute = -1
 
 matrix = Adafruit_RGBmatrix(32,1)
+image_did = Image.open("Assets/didgeridoo.jpg")
 image_a = Image.open("Assets/Alphabet/a.jpg")
 image_b = Image.open("Assets/Alphabet/b.jpg")
+image_did.load()
 image_a.load()
 image_b.load()
 
-for n in range(0,31):
-    matrix.SetImage(image_a.im.id, n, 10)
-    matrix.SetImage(image_b.im.id, n, 0)
+while True:
+    matrix.SetImage(image_a.im.id, 0, 0)
+    matrix.SetImage(image_b.im.id, 5, 0)
+
+#for n in range(0,31):
+#    matrix.SetImage(image_a.im.id, n, 10)
+#    matrix.SetImage(image_b.im.id, n, 0)
 
 while True:
     if new_minute >= 5:
