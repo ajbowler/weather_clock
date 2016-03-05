@@ -4,6 +4,8 @@ import Image
 import ImageDraw
 from rgbmatrix import Adafruit_RGBmatrix
 from time import gmtime, strftime
+import time
+import sched
 import os
 
 key = "14fb6128f6219c5f"
@@ -111,10 +113,12 @@ images = {
     '.': image_period
 }
 
+s = sched.scheduler(time.time, time.sleep)
+
 for key, value in images.iteritems():
     value.load()
 
-while True:
+def draw(sc):
     if update_minute != minute:
         # if 5 minutes have passed, update the weather
         if new_minute >= 5:
@@ -174,6 +178,8 @@ while True:
 
     update_minute = strftime("%M")
 
+s.enter(60, 1, draw, (s,))
+s.run()
 
 
 
