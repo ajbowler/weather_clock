@@ -81,7 +81,7 @@ images = {
     'w': image_w, 'W': image,
     'x': image_x, 'X': image,
     'y': image_y, 'Y': image,
-    'z': image_z, 'Z': image,
+    'z': image_z,
     '1': image_1,
     '2': image_2,
     '3': image_3,
@@ -91,7 +91,7 @@ images = {
     '7': image_7,
     '8': image_8,
     '9': image_9,
-    '0': image_0, 
+    '0': image_0,
     '-': image_minus,
     ':': image_colon,
     '.': image_period
@@ -137,7 +137,7 @@ while True:
             count +=5
         #display weather
         count = 0
-        for c in weather:
+        for c in weather.lower:
             matrix.SetImage(images[c].im.id, count, 17)
 
         print strftime("%I:%M")
