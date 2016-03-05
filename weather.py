@@ -97,7 +97,7 @@ images = {
     '.': image_period
 }
 
-for key, value in images:
+for key, value in images.iteritems():
     value.load()
 
 while True:
