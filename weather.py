@@ -8,9 +8,12 @@ import time
 import sched
 import os
 
-key = "14fb6128f6219c5f"
-zip = "50011"
-url = 'http://api.wunderground.com/api/' + key + '/geolookup/conditions/q/PA/' + zip + '.json'
+config = dict(line.strip().split('=') for line in open('config'))
+
+key = config['key']
+zip_code = config['zip_code']
+url = 'http://api.wunderground.com/api/' + key + '/geolookup/conditions/q/KS/' + zip_code + '.json'
+
 minute = strftime("%M")
 new_minute = 5
 update_minute = -1
