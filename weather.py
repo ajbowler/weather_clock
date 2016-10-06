@@ -10,7 +10,8 @@ config = dict(line.strip().split('=') for line in open('config'))
 
 key = config['key']
 zip_code = config['zip_code']
-url = 'http://api.wunderground.com/api/' + key + '/geolookup/conditions/q/KS/' + zip_code + '.json'
+weather_url = 'http://api.wunderground.com/api/' + key + '/geolookup/conditions/q/' + zip_code + '.json'
+astronomy_url = 'http://api.wunderground.com/api/' + key + '/astronomy/q/' + zip_code + '.json'
 
 minute = strftime("%M")
 new_minute = 5
@@ -117,62 +118,78 @@ images = {
 for key, value in images.iteritems():
     value.load()
 
+def get_current_conditions():
+  f = urllib2.urlopen(weather_url)
+  json_string = f.read()
+  parsed_json = json.loads(json_string)
+  weather = parsed_json['current_observation']['weather']
+  temperature = parsed_json['current_observation']['temp_f']
+  f.close()
+  return {'weather': weather, 'temperature': temperature}
+
+def get_astronomy():
+  f = urllib2.urlopen(astronomy_url)
+  json_string = f.read()
+  parsed_json = json.loads(json_string)
+  moon_phase = parsed_json['moon_phase']['phaseofMoon']
+  sunrise = parsed_json['moon_phase']['sunrise']
+  sunset = parsed_json['moon_phase']['sunset']
+  f.close()
+  return {'moon_phase': moon_phase, 'sunrise': sunrise, 'sunset': sunset}
+
 while True:
-    if update_minute != minute:
-        # if 5 minutes have passed, update the weather
-        if new_minute >= 5:
-            f = urllib2.urlopen(url)
-            json_string = f.read()
-            parsed_json = json.loads(json_string)
-            weather = parsed_json['current_observation']['weather']
-            temperature_string = parsed_json['current_observation']['temp_f']
-            feelslike_string = parsed_json['current_observation']['feelslike_f']
-            new_minute = 0
-            f.close()
-        else:
-            new_minute += 1
+  if update_minute != minute:
+    # if 5 minutes have passed, update the weather
+    if new_minute >= 5:
+      current_conditions = get_current_conditions()
+      astronomy = get_astronomy()
+      print astronomy['moon_phase']
+      print astronomy['sunrise']
+      print astronomy['sunset']
+    else:
+      new_minute += 1
 
-        time = strftime("%I:%M")
+    time = strftime("%I:%M")
 
-        matrix.Clear()
-        #display time
-        count = 5
-        for c in time:
-            matrix.SetImage(images[c].im.id, count, 0)
-            count += 5
+    matrix.Clear()
 
-        #display actual temperature
-        count = 0
-        for c in str(temperature_string):
-            matrix.SetImage(images[c].im.id, count+6 ,7)
-            count +=5
-        #display weather
-        count = 0
+    #display time
+    count = 5
+    for c in time:
+      matrix.SetImage(images[c].im.id, count, 0)
+      count += 5
 
-        low_weather = weather.lower()
+    #display actual temperature
+    count = 0
+    for c in str(current_conditions['temperature']):
+      matrix.SetImage(images[c].im.id, count+6 ,7)
+      count +=5
+    #display weather
+    count = 0
 
-        if "snow" in low_weather:
-            matrix.SetImage(image_snow.im.id, 0, 15)
-        elif "partly" in low_weather:
-            matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
-        elif "scattered" in low_weather:
-            matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
-        elif "mostly" in low_weather:
-            matrix.SetImage(image_cloudy.im.id, 0, 15)
-        elif "overcast" in low_weather:
-            matrix.SetImage(image_cloudy.im.id, 0, 15)
-        elif "thunderstorm" in low_weather:
-            matrix.SetImage(image_thunder_storm.im.id, 0, 15)
-        elif "rain" in low_weather:
-            matrix.SetImage(image_rain.im.id, 0, 15)
-        elif "cloudy" in low_weather:
-            matrix.SetImage(image_sunny.im.id, 0, 15)
+    low_weather = current_conditions['weather'].lower()
+
+    if "snow" in low_weather:
+      matrix.SetImage(image_snow.im.id, 0, 15)
+    elif "partly" in low_weather:
+      matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
+    elif "scattered" in low_weather:
+      matrix.SetImage(image_partly_cloudy.im.id, 0, 15)
+    elif "mostly" in low_weather:
+      matrix.SetImage(image_cloudy.im.id, 0, 15)
+    elif "overcast" in low_weather:
+      matrix.SetImage(image_cloudy.im.id, 0, 15)
+    elif "thunderstorm" in low_weather:
+      matrix.SetImage(image_thunder_storm.im.id, 0, 15)
+    elif "rain" in low_weather:
+      matrix.SetImage(image_rain.im.id, 0, 15)
+    elif "cloudy" in low_weather:
+      matrix.SetImage(image_sunny.im.id, 0, 15)
 
 
-        print strftime("%I:%M")
-        minute = strftime("%M")
-        print weather.lower()
-        print "Temp: " + str(temperature_string)
-        print "Feels like	" + str(feelslike_string)
+    print strftime("%I:%M")
+    minute = strftime("%M")
+    print current_conditions['weather'].lower()
+    print "Temp: " + str(current_conditions['temperature'])
 
-    update_minute = strftime("%M")
+  update_minute = strftime("%M")
